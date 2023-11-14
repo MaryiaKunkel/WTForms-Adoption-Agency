@@ -50,19 +50,18 @@ def show_and_edit_pet_info(pet_id):
     form=AddPetForm(obj=pet)
 
     if form.validate_on_submit():
-        pet.name=form.name.data
-        pet.species=form.species.data
-        pet.age=form.age.data
         pet.photo_url=form.photo_url.data
         pet.notes=form.notes.data
-
+        pet.available=form.available.data
+        
         db.session.commit()
+
         flash(f'{pet.species} {pet.name} {pet.age} years old is edited')
 
-        return redirect('/<int:pet_id>')
+        return redirect('/')
     
     else:
-        return render_template('pet_info.html', pet=pet)
+        return render_template('pet_info.html', pet=pet, form=form)
 
 
     
