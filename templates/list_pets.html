@@ -1,0 +1,20 @@
+<!-- list_pets.html -->
+
+{% extends 'base.html' %} {% block title %}List of Pets{% endblock %} {% block
+content %} {% for msg in get_flashed_messages() %}
+<p>{{msg}}</p>
+{% endfor %}
+
+<h1>Pets</h1>
+
+<div>
+  {% for pet in pets %}
+  <img src="pet.photo_url" alt="{{pet.name}}'s photo" />
+  <p><a href="/{{pet.id}}">{{pet.name}}</a> is <b>available!</b></p>
+  {% endfor %}
+</div>
+<form action="/add">
+  <button>Add a pet</button>
+</form>
+
+{% endblock %}
