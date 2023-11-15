@@ -9,7 +9,7 @@ content %} {% for msg in get_flashed_messages() %}
 
 <div>
   {% for pet in pets %}
-  <img src="pet.photo_url" alt="{{pet.name}}'s photo" />
+  <img src="{{pet.photo_url}}" width="300px" alt="{{pet.name}}'s photo" />
   <p><a href="/{{pet.id}}">{{pet.name}}</a> is <b>available!</b></p>
   {% endfor %}
 </div>

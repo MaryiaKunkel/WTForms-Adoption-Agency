@@ -5,7 +5,7 @@ content %}
 
 <h1>Add new pet</h1>
 
-<form method="POST">
+<form action="/add" method="POST">
   {{ form.hidden_tag() }} {% for field in form if
   field.widget.input_type!='hidden' %}
   <p>{{field.label}} {{field}}</p>

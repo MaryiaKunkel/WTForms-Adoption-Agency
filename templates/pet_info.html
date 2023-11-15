@@ -7,17 +7,19 @@
 <h1>{{pet.name}}'s info</h1>
 
 <div>
-  <img src="{{pet.photo_url}}" alt="{{pet.name}}'s photo" />
+  <img src="{{pet.photo_url}}" width="300px" alt="{{pet.name}}'s photo" />
   <p>Name: {{pet.name}}</p>
   <p>Species: {{pet.species}}</p>
   <p>Age: {{pet.age}}</p>
 </div>
 <form action="/{{pet.id}}" method="POST">
+    {{ form.hidden_tag() }}
+
     <label for="photo_url">Photo URL</label>
-    <input type="text" name="photo_url" id="photo_url" value={{pet.photo_url}}></br></br>
+    <input type="text" name="photo_url" id="photo_url" value="{{pet.photo_url}}"></br></br>
 
     <label for="notes">Notes</label>
-    <input type="text" name="notes" id="notes" value={{pet.notes}}></br></br>
+    <input type="text" name="notes" id="notes" value="{{pet.notes}}"></br></br>
 
     <label for="available">Available</label>
     <input type="checkbox" name="available" id="available" {% if pet.available %}checked{% endif %}></br></br>

@@ -2,12 +2,12 @@
 
 from flask import Flask, request, render_template, redirect, flash, url_for
 from models import Pet, db, connect_db
-from forms import AddPetForm
+from forms import AddPetForm, EditPetForm
 
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///pet_shelter_db"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = "chickenzarecool21837"
 app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
@@ -47,9 +47,10 @@ def add_pet_form():
 def show_and_edit_pet_info(pet_id):
     '''A page that shows the pet info and an edit form'''
     pet=Pet.query.get_or_404(pet_id)
-    form=AddPetForm(obj=pet)
+    form=EditPetForm(obj=pet)
 
     if form.validate_on_submit():
+
         pet.photo_url=form.photo_url.data
         pet.notes=form.notes.data
         pet.available=form.available.data
@@ -61,6 +62,7 @@ def show_and_edit_pet_info(pet_id):
         return redirect('/')
     
     else:
+        print("Errors:", form.errors)
         return render_template('pet_info.html', pet=pet, form=form)
 
 
